@@ -1,0 +1,40 @@
+# Throwaway harness. Determines whether the Actions approval gate keys off the
+# repository access of the PR author. Opens a pull request as whichever identity
+# the token belongs to; the signal is the conclusion of the resulting
+# `pull_request` run on attempt 1, not whether that run passes.
+#
+# Delete this file and the token-gate-test branch once the question is settled.
+name: Token Gate Test
+
+on:
+  push:
+    branches: [token-gate-test]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Touches a file outside charts/ so `ct list-changed` finds nothing and
+      # lint-test finishes in seconds. A real release pull request costs ~11 min.
+      - name: Open a pull request as the token identity
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          branch="token-gate-probe-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          date -u > .token-gate-probe
+          git add .token-gate-probe
+          git commit -m "test: token gate probe"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "test: token gate probe (GITHUB_TOKEN baseline)" \
+            --body "Throwaway. Checks whether this pull request's checks are gated behind manual approval."
