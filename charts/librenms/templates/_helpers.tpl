@@ -220,7 +220,3 @@ Redis database number
 {{- .Values.externalRedis.db | default 0 -}}
 {{- end -}}
 {{- end -}}
-
-{{/* test: release pipeline verification, fork only */}}
-
-{{/* test: release pipeline verification 2, fork only */}}
