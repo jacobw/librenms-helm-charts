@@ -1,10 +1,12 @@
 name: Release Charts
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   release:
-    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
       packages: write
@@ -28,10 +30,7 @@ jobs:
         uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5.0.1
 
       - name: Add repositories
-        run: |
-          for dir in $(ls -d charts/*/); do
-            helm dependency list $dir 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read cmd; do $cmd; done
-          done
+        run: helm repo add helmforge https://repo.helmforge.dev
 
       - name: Generate and commit helm docs
         uses: losisin/helm-docs-github-action@9e0787c426fdec38be6288bb5c0559dcb388412c # v2.0.1
