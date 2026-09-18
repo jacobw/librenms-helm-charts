@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.0.2](https://github.com/jacobw/librenms-helm-charts/compare/librenms-11.0.1...librenms-11.0.2) (2026-09-18)
+
+
+### Bug Fixes
+
+* remove the release pipeline test markers ([f8ce8ea](https://github.com/jacobw/librenms-helm-charts/commit/f8ce8ea3f0547e5dac09a32c80c2c88c1b6d3009))
+
 ## [11.0.1](https://github.com/jacobw/librenms-helm-charts/compare/librenms-11.0.0...librenms-11.0.1) (2026-09-18)
 
 
