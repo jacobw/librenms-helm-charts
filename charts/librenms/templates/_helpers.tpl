@@ -222,3 +222,5 @@ Redis database number
 {{- end -}}
 
 {{/* test: release pipeline verification, fork only */}}
+
+{{/* test: release pipeline verification 2, fork only */}}
