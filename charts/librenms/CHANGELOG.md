@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.0.1](https://github.com/jacobw/librenms-helm-charts/compare/librenms-11.0.0...librenms-11.0.1) (2026-09-18)
+
+
+### Bug Fixes
+
+* verify the release pipeline again ([ae9001b](https://github.com/jacobw/librenms-helm-charts/commit/ae9001b690b1baa237af0917d90b4965e5b4db80))
+
 ## [11.0.0](https://github.com/jacobw/librenms-helm-charts/compare/librenms-10.1.1...librenms-11.0.0) (2026-09-18)
 
 
